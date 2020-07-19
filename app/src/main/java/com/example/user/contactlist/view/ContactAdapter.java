@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ import com.example.user.contactlist.R;
 import com.example.user.contactlist.databinding.ItemContactBinding;
 import com.example.user.contactlist.model.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,12 +30,42 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
+    private List<Contact> filtered_icontacts= new ArrayList<>();
+    private ItemFilter mFilter = new ItemFilter();
+
+
+    private OnItemClickListener mOnItemClickListener;
+    /**
+     * The interface On item click listener.
+     */
+    public interface OnItemClickListener {
+        /**
+         * On item click.
+         *
+         * @param view     the view
+         * @param obj      the obj
+         * @param position the position
+         */
+        void onItemClick(View view, Contact obj, int position);
+    }
+
+    /**
+     * Sets on item click listener.
+     *
+     * @param mItemClickListener the m item click listener
+     */
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mOnItemClickListener = mItemClickListener;
+    }
+
+
     ContactAdapter(Context context) {
         this.context = context;
     }
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+        this.filtered_icontacts=contacts;
     }
 
     @NonNull
@@ -47,14 +79,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, int i) {
-        contactViewHolder.onBind(contacts.get(i));
+        contactViewHolder.onBind(filtered_icontacts.get(i));
         // Here you apply the animation when the view is bound
         setAnimation(contactViewHolder.itemView, i);
     }
 
     @Override
     public int getItemCount() {
-        return contacts != null ? contacts.size() : 0;
+       // return contacts != null ? contacts.size() : 0;
+        return filtered_icontacts.size();
     }
 
 
@@ -90,7 +123,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
 /*        *
      * Here is the key method to apply the animation*/
-
     private void setAnimation(View viewToAnimate, int position)
     {
         // If the bound view wasn't previously displayed on screen, it's animated
@@ -109,5 +141,42 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     private int getRandomColor() {
         Random rnd = new Random();
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+
+
+    /**
+     * Gets filter.
+     *
+     * @return the filter
+     */
+    public Filter getFilter() {
+        return mFilter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String query = constraint.toString().toLowerCase();
+            FilterResults results = new FilterResults();
+            final List<Contact> list = contacts;
+            final List<Contact> result_list = new ArrayList<>(list.size());
+            for (int i = 0; i < list.size(); i++) {
+                String str_title = list.get(i).getName();
+                if (str_title.toLowerCase().contains(query)) {
+                    result_list.add(list.get(i));
+                }
+            }
+            results.values = result_list;
+            results.count = result_list.size();
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filtered_icontacts = (List<Contact>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }
