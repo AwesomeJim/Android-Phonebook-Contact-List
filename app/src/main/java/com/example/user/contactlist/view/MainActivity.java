@@ -2,13 +2,13 @@ package com.example.user.contactlist.view;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import androidx.databinding.DataBindingUtil;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.contact_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        ContactAdapter adapter = new ContactAdapter();
+        ContactAdapter adapter = new ContactAdapter(this);
         adapter.setContacts(contactViewModel.getContacts());
         recyclerView.setAdapter(adapter);
     }
