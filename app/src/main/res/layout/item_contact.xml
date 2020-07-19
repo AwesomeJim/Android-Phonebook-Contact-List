@@ -1,13 +1,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-  <!--  <data>
-        <import type="android.view.View"/>
-        <variable
-            name="contact"
-            type="com.example.user.contactlist.model.Contact"/>
-    </data>
--->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--  <data>
+          <import type="android.view.View"/>
+          <variable
+              name="contact"
+              type="com.example.user.contactlist.model.Contact"/>
+      </data>
+  -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,15 +16,14 @@
             android:id="@+id/selectedContact_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/drawableTextView"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:background="@drawable/circular_bg"
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="@color/colorWhite"
@@ -42,7 +41,6 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/contact_number"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +52,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="2dp"
                 android:padding="3dp"
                 android:textSize="14sp"

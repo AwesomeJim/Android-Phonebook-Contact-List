@@ -1,20 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/colorWhite"
+    android:orientation="vertical"
     tools:context=".view.MainActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Light">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
@@ -24,50 +27,57 @@
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="3dp">
+
                 <LinearLayout
                     android:id="@+id/search_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="visible"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
                     <ImageButton
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
                         android:background="@android:color/transparent"
                         android:tint="@color/colorPrimary"
                         app:srcCompat="@drawable/ic_search_icon" />
+
                     <EditText
                         android:id="@+id/et_search"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
+                        android:focusableInTouchMode="false"
                         android:hint="Enter name to search"
                         android:imeOptions="actionSearch"
                         android:maxLines="1"
-                        android:focusableInTouchMode="false"
                         android:singleLine="true">
+
                         <requestFocus />
                     </EditText>
                 </LinearLayout>
+
                 <androidx.appcompat.widget.SearchView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    app:queryHint="Search Banks"
                     android:id="@+id/searchView"
-                    android:visibility="gone"
-                    android:icon="@android:drawable/ic_menu_search"
-                    app:showAsAction="always|collapseActionView"
-                    app:actionViewClass="android.support.v7.widget.SearchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:icon="@android:drawable/ic_menu_search"
                     android:title="Search Bank"
-                    app:defaultQueryHint="Search Bank">
+                    android:visibility="gone"
+                    app:actionViewClass="android.support.v7.widget.SearchView"
+                    app:defaultQueryHint="Search Bank"
+                    app:queryHint="Search Banks"
+                    app:showAsAction="always|collapseActionView">
+
                     <requestFocus />
                 </androidx.appcompat.widget.SearchView>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/contact_name"
         android:layout_width="wrap_content"
@@ -75,23 +85,26 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:padding="3dp"
+        android:text="My Number"
         android:textSize="14sp"
-        android:textStyle="bold"
-        android:text="My Number" />
-   <include layout="@layout/item_contact"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginStart="8sp"
-       android:layout_marginEnd="8dp"
-       android:layout_marginLeft="8dp"
-       android:layout_marginRight="8dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contact_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="8sp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"/>
-    </LinearLayout>
+        android:textStyle="bold" />
+
+    <include
+        layout="@layout/item_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contact_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
+</LinearLayout>
