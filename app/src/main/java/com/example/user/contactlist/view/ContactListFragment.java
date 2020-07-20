@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -69,6 +70,9 @@ public class ContactListFragment extends Fragment implements View.OnClickListene
         adapter = new ContactAdapter(binding.contactRecyclerView.getContext());
         adapter.setContacts(contactViewModel.getContacts());
         binding.contactRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener((view, obj, position) -> {
+            Toast.makeText(getContext(), "Contact Selected\n"+obj.getName()+obj.getPhoneNumber(), Toast.LENGTH_LONG).show();
+        });
     }
 
 

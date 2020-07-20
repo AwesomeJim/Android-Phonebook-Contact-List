@@ -30,11 +30,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
-    private List<Contact> filtered_icontacts= new ArrayList<>();
+    private List<Contact> filtered_icontacts = new ArrayList<>();
     private ItemFilter mFilter = new ItemFilter();
 
 
     private OnItemClickListener mOnItemClickListener;
+
     /**
      * The interface On item click listener.
      */
@@ -65,7 +66,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
-        this.filtered_icontacts=contacts;
+        this.filtered_icontacts = contacts;
     }
 
     @NonNull
@@ -86,7 +87,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public int getItemCount() {
-       // return contacts != null ? contacts.size() : 0;
+        // return contacts != null ? contacts.size() : 0;
         return filtered_icontacts.size();
     }
 
@@ -105,6 +106,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             // binding.setContact(contact);
             binding.contactName.setText(contact.getName());
             binding.contactNumber.setText(contact.getPhoneNumber());
+            binding.selectedContactLayout.setOnClickListener(view ->
+                    mOnItemClickListener.onItemClick(view, contact, getAdapterPosition()));
             if (contact.getPhotoUri() != null) {
                 binding.drawableTextView.setVisibility(View.GONE);
                 binding.contactPhoto.setVisibility(View.VISIBLE);
@@ -121,13 +124,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         }
     }
 
-/*        *
+    /*        *
      * Here is the key method to apply the animation*/
-    private void setAnimation(View viewToAnimate, int position)
-    {
+    private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation_from_right);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
@@ -142,7 +143,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         Random rnd = new Random();
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
-
 
 
     /**

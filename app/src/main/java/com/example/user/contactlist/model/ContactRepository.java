@@ -22,6 +22,8 @@ public class ContactRepository {
 
     public List<Contact> fetchContacts() {
         Contact contact;
+        //hold a list of Contacts without duplicates
+        Map<String, Contact> cleanList = new LinkedHashMap<String, Contact>();
         Cursor cursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null, null, null,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
@@ -35,20 +37,17 @@ public class ContactRepository {
                 contact.setName(name);
                 contact.setPhoneNumber(formatPhoneNumber(phoneNo));
                 contact.setPhotoUri(photoUri);
-                contacts.add(contact);
+                //contacts.add(contact);
+                cleanList.put(contact.getPhoneNumber(), contact);
             }
-            /*entities = contacts;
-            Set<Contact> s = new HashSet<>(entities);
-            entities.clear();
-            entities.addAll(s)*/
-            ;
         }
         if (cursor != null) {
             cursor.close();
         }
-        return clearListFromDuplicatePhoneNumber(contacts);
+        return new ArrayList<Contact>(cleanList.values());
     }
 
+    //Using LinkedHashMap to eliminate duplicate Contacts
     private List<Contact> clearListFromDuplicatePhoneNumber(List<Contact> list1) {
         Map<String, Contact> cleanMap = new LinkedHashMap<String, Contact>();
         for (int i = 0; i < list1.size(); i++) {
@@ -57,6 +56,7 @@ public class ContactRepository {
         return new ArrayList<Contact>(cleanMap.values());
     }
 
+    //Format Phone Number
     private static String formatPhoneNumber(String phone) {
         String formatedPhone = phone.replaceAll(" ", "");
         int phoneNumberLength = formatedPhone.length();

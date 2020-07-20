@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, ContactListFragment.newInstance())
+                    .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
                     .commitNow();
         }
     }
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, ContactListFragment.newInstance())
+                    .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
                     .commitNow();
         }
     }

@@ -17,9 +17,7 @@ Application Functions:
 
 License
 --------
-
-     Android-Phonebook-Contact-List
-      Copyright (c) 2020 Awesome Jim (https://github.com/AwesomeJim/Android-Phonebook-Contact-List/).
+      Copyright (c) 2020 Awesome Jim [Android-Phonebook-Contact-List](https://github.com/AwesomeJim/Android-Phonebook-Contact-List/) .
 
       Licensed under the Apache License, Version 2.0 (the "License");
       you may not use this file except in compliance with the License.
